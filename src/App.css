@@ -11,3 +11,8 @@
 .card-body{
   margin-top: 10px;
 }
+
+.countInc, .countDec, .countReset{
+  margin: 2px;
+}
+
