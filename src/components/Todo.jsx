@@ -1,16 +1,29 @@
 import Card from "./Card";
+import { useEffect } from "react";
 
-function Todo({task, priority, onClickTask}){
+const Todo = ({task, priority, onClickTask})=>{
+    useEffect(() => {
+        console.log("Todo mounted:", task);
+
+        return () => {
+        console.log("Todo unmounted:", task);
+        };
+    }, []);
+
+    useEffect(() => {
+        console.log("Task updated:", task);
+    }, [task]);
+
     return (
         <p onClick={()=>onClickTask(task)} style={{color: "blue", cursor: "pointer"}}>
             {task} - {priority}
-           
         </p>
+        
         
     );
 }
 
-function TodoList(){
+const TodoList = ()=>{
     const isCompleted = (task)=>{
         console.log("clicked task is:", task)     
     }
