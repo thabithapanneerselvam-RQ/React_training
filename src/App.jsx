@@ -1,6 +1,7 @@
 import './App.css'
 import TodoList from "../src/components/Todo"
 import Counter from "../src/components/Counter"
+import FetchAPI from "../src/components/FetchAPI"
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <TodoList />
       <Counter />
+      <FetchAPI />
     </>
   )
 }
