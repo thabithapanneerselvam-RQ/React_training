@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Users(){
   const [users, setUsers]=useState([]);
   const [loading, setLoading]=useState(false);
-
+  
   const fetchUsers=async()=>{
-    setLoading(true);
-    const response=await fetch(
-      "https://jsonplaceholder.typicode.com/users"
-    );
-    const data=await response.json();
-    setUsers(data);
-    setLoading(false);
-  };
+    try{
+        setLoading(true);
+
+        const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/users"
+        );
+
+        setUsers(response.data); 
+    }catch(error){
+        console.error("Error fetching users:", error);
+    }finally{
+        setLoading(false);
+    }
+};
+
 
   useEffect(()=>{
     console.log("component mounted")
