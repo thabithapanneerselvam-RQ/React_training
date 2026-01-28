@@ -27,7 +27,7 @@ function Users(){
   }, []);
 
   return(
-    <div>
+    <div className="user-card">
       <h2>Users List</h2>
 
       <button onClick={fetchUsers}>Load Users</button>
