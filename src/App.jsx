@@ -21,6 +21,7 @@ function App() {
           <Route path="bike" element={<BikeProducts />} />
         </Route>
       </Routes>
+      
     </>
   )
 }

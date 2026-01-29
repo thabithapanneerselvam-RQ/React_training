@@ -16,15 +16,6 @@
   margin: 2px;
 }
 
-.user-card{
-  width:50%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  background: #f9f9f9;
-  margin: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
 
 .getInput{
   margin-right: 12px;
@@ -38,3 +29,16 @@
   padding: 15px;
 }
 
+
+.card.light{
+  color: #000;
+}
+
+.card.dark{
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.btn{
+  margin-right: 10px;
+}

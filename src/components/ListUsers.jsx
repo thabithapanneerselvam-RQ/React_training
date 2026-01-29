@@ -1,77 +1,67 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import useUsers from "../hooks/useUsers";
+import Card from "./Card";
+import {
+  USER_LIST_TITLE,
+  LOAD_USERS_TEXT,
+  SEARCH_PLACEHOLDER,
+  ALL_COMPANIES
+} from "../constants/textConstants";
 
-function Users(){
-  const [users, setUsers]=useState([]);
-  const [loading, setLoading]=useState(false);
+function ListUsers() {
+  const { users, loading, loadUsers } = useUsers();
   const [search, setSearch] = useState("");
   const [companyFilter, setCompanyFilter] = useState("");
 
-  const fetchUsers=async()=>{
-    try{
-      setLoading(true);
-      const response=await axios.get("https://jsonplaceholder.typicode.com/users");
-      setUsers(response.data);
-    }catch(error){
-      console.error("error in fetching users list", error)
-    }finally{
-      setLoading(false);
-    }
-  }
+  const filteredUsers = users.filter(user => {
+    const matchName = user.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
+    const matchCompany =
+      companyFilter === "" ||
+      user.company.name === companyFilter;
 
+    return matchName && matchCompany;
+  });
 
-  const filteredUsers=users.filter((user)=>{
-    const searchUser=user.name.toLowerCase().includes(search.toLowerCase());
+  const companies = [...new Set(users.map(u => u.company.name))];
 
-    const filterData=companyFilter==="" || user.company.name===companyFilter;
+  return (
+    <Card title={USER_LIST_TITLE}>
+      <button onClick={loadUsers}>{LOAD_USERS_TEXT}</button>
 
-    return searchUser && filterData;
-  })
+      <br /><br />
 
+      <input
+        placeholder={SEARCH_PLACEHOLDER}
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+      />
 
-
-
-
-
-return(
-  <>
-  <div class="user-card">
-    <h2>Users List</h2> 
-    <button onClick={fetchUsers}>Load users</button> <br /><br />
-
-    <input className="getInput" type="text" placeholder="search by name" value={search} onChange={(e)=>
-      setSearch(e.target.value)}
-    />
-
-    <select value={companyFilter} onChange={(e)=>
-      setCompanyFilter(e.target.value)}>
-    
-    <option value="">All companies</option>
-    {[...new Set(users.map((user)=>user.company.name))].map(
-      (company, index)=>(
-        <option key={index} value={company}>
-          {company}
+      <select
+        value={companyFilter}
+        onChange={e => setCompanyFilter(e.target.value)}
+      >
+        <option value="">{ALL_COMPANIES}</option>
+        {companies.map(company => (
+          <option key={company} value={company}>
+            {company}
           </option>
-        )
-    )}
-    
-    </select>
+        ))}
+      </select>
 
-    {loading && <p>Loading...</p>}
+      {loading && <p>Loading...</p>}
 
-    <ul>
-      {filteredUsers.map((user)=>(
-        <li key={user.id}>
-          {user.name} - {user.email}
-           <br />
+      <ul>
+        {filteredUsers.map(user => (
+          <li key={user.id}>
+            {user.name} - {user.email}
           </li>
-      ))}
-    </ul>
-  </div>
-  </>
-)
-
+        ))}
+      </ul>
+    </Card>
+  );
 }
 
-export default Users;
+export default ListUsers;

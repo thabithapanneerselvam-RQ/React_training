@@ -2,6 +2,7 @@ import TodoList from "../components/Todo";
 import Counter from "../components/Counter";
 import FetchAPI from "../components/FetchAPI";
 import ListUsers from "../components/ListUsers";
+import Forms from "../components/Forms";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <Counter />
       <FetchAPI />
       <ListUsers />
+      <Forms />
     </>
   );
 }

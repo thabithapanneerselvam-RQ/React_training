@@ -1,49 +1,38 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import useFetchUsers from "../hooks/useUsers";
+import { useEffect } from "react";
+import Card from "./Card";
+import {
+  USER_LIST_TITLE,
+  LOAD_USERS_TEXT,
+} from "../constants/textConstants";
 
-function Users(){
-  const [users, setUsers]=useState([]);
-  const [loading, setLoading]=useState(false);
-  
-  const fetchUsers=async()=>{
-    try{
-        setLoading(true);
-
-        const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-        );
-
-        setUsers(response.data); 
-    }catch(error){
-        console.error("Error fetching users:", error);
-    }finally{
-        setLoading(false);
-    }
-};
-
+function FetchApi() {
+  const { users, loading, loadUsers } = useFetchUsers();
 
   useEffect(()=>{
     console.log("component mounted")
   }, []);
 
-  return(
-    <div className="user-card">
-      <h2>Users List</h2>
+  return (
+    <Card title={USER_LIST_TITLE}>
+      <button onClick={loadUsers}>{LOAD_USERS_TEXT}</button>
 
-      <button onClick={fetchUsers}>Load Users</button>
-
-      {loading && <p>Loading...</p>}
+      {loading && <p>loading...</p>}
 
       <ul>
-        {users.map((user)=>(
+        {users.map(user => (
           <li key={user.id}>
             {user.name} - {user.email}
-            <br />
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 }
 
-export default Users;
+export default FetchApi;
+
+
+
+
+  
