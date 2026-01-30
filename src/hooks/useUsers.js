@@ -16,7 +16,6 @@ function useUsers() {
       setLoading(false);
     }
   };
-
   return { users, loading, loadUsers };
 }
 

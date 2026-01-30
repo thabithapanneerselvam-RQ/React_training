@@ -1,4 +1,4 @@
-import useFetchUsers from "../hooks/useUsers";
+import useUsers from "../hooks/useUsers";
 import { useEffect } from "react";
 import Card from "./Card";
 import {
@@ -7,7 +7,7 @@ import {
 } from "../constants/textConstants";
 
 function FetchApi() {
-  const { users, loading, loadUsers } = useFetchUsers();
+  const { users, loading, loadUsers } = useUsers();
 
   useEffect(()=>{
     console.log("component mounted")

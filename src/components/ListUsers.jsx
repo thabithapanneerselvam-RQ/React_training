@@ -24,7 +24,6 @@ function ListUsers() {
 
     return matchName && matchCompany;
   });
-
   const companies = [...new Set(users.map(u => u.company.name))];
 
   return (
