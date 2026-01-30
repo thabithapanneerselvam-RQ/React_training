@@ -7,7 +7,7 @@ import {
 } from "../constants/textConstants";
 
 function FetchApi() {
-  const { users, loading, loadUsers } = useUsers();
+  const { users, loading, loadUsers } = useUsers("https://jsonplaceholder.typicode.com/users");
 
   useEffect(()=>{
     console.log("component mounted")

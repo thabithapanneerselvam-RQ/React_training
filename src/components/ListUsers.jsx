@@ -7,10 +7,15 @@ import {
   SEARCH_PLACEHOLDER,
   ALL_COMPANIES
 } from "../constants/textConstants";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "../app/user.slice";
 
 function ListUsers() {
-  const { users, loading, loadUsers } = useUsers();
-  const [search, setSearch] = useState("");
+  const { users, loading, loadUsers } = useUsers("https://jsonplaceholder.typicode.com/users");
+
+  const dispatch = useDispatch();
+  const search = useSelector(state=>state.user.search)
+
   const [companyFilter, setCompanyFilter] = useState("");
 
   const filteredUsers = users.filter(user => {
@@ -35,7 +40,7 @@ function ListUsers() {
       <input
         placeholder={SEARCH_PLACEHOLDER}
         value={search}
-        onChange={e => setSearch(e.target.value)}
+        onChange={e => dispatch(setSearch(e.target.value))}
       />
 
       <select

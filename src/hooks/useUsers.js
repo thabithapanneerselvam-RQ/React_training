@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { fetchUsers } from "../services/userService";
 
-function useUsers() {
+function useUsers(url) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const loadUsers = async () => {
     try {
       setLoading(true);
-      const data = await fetchUsers();
+      const data = await fetchUsers(url);
       setUsers(data);
     } catch (error) {
       console.error("Error fetching users", error);

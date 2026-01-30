@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://jsonplaceholder.typicode.com/users";
 
-export const fetchUsers = async()=>{
-  const response = await axios.get(API_URL);
+export const fetchUsers = async(url)=>{
+  const response = await axios.get(url);
   return response.data;
 };
