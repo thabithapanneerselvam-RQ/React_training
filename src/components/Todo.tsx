@@ -1,7 +1,7 @@
 import Card from "./Card";
 import { useEffect } from "react";
 
-const Todo = ({task, priority, onClickTask})=>{
+const Todo = ({task, priority, onClickTask}:any)=>{
     useEffect(() => {
         console.log("Todo mounted:", task);
 
@@ -24,7 +24,7 @@ const Todo = ({task, priority, onClickTask})=>{
 }
 
 const TodoList = ()=>{
-    const isCompleted = (task)=>{
+    const isCompleted = (task:any)=>{
         console.log("clicked task is:", task)     
     }
     return (

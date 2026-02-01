@@ -1,10 +1,10 @@
 import './App.css'
-import Navigation from "../src/components/Navigation"
+import Navigation from "./components/Navigation"
 
 import { Route, Routes } from 'react-router-dom'
-import Home from "../src/pages/Home";
-import About from "../src/pages/About";
-import Contact from "../src/pages/Contact";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import { Products, CarProducts, BikeProducts } from './pages/Products';
 import useRedirectHome from './hooks/useNavigateHome';
 
