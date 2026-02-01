@@ -7,16 +7,17 @@ import {
   SEARCH_PLACEHOLDER,
   ALL_COMPANIES
 } from "../constants/textConstants";
-import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../app/user.slice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+
 
 function ListUsers() {
   const { users, loading, loadUsers } = useUsers("https://jsonplaceholder.typicode.com/users");
 
-  const dispatch = useDispatch();
-  const search = useSelector(state=>state.user.search)
+  const dispatch = useAppDispatch();
+  const search = useAppSelector(state=>state.user.search)
 
-  const [companyFilter, setCompanyFilter] = useState("");
+  const [companyFilter, setCompanyFilter] = useState<string>("");
 
   const filteredUsers = users.filter(user => {
     const matchName = user.name
@@ -29,7 +30,10 @@ function ListUsers() {
 
     return matchName && matchCompany;
   });
-  const companies = [...new Set(users.map(u => u.company.name))];
+  
+  const companies = Array.from(
+    new Set(users.map(user=>user.company.name))
+  )
 
   return (
     <Card title={USER_LIST_TITLE}>

@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 const Counter = ()=>{
-    let [count, setCount] = useState(0);
+    let [count, setCount] = useState<number>(0);
 
-    const handleIncrease = ()=>{
+    const handleIncrease = (): void=>{
         setCount(count=>count+1);
     }
-    const handleDecrease = ()=>{
+    const handleDecrease = (): void=>{
         setCount(count=>count-1);
     }
-    const handleReset = ()=>{
+    const handleReset = (): void=>{
         setCount(0);
     }
 

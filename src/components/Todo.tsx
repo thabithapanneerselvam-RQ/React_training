@@ -1,7 +1,14 @@
 import Card from "./Card";
 import { useEffect } from "react";
 
-const Todo = ({task, priority, onClickTask}:any)=>{
+type TodoProps={
+    task: string
+    priority: number
+    onClickTask: (task: string)=>void
+}
+
+
+const Todo = ({task, priority, onClickTask}:TodoProps)=>{
     useEffect(() => {
         console.log("Todo mounted:", task);
 
@@ -24,14 +31,14 @@ const Todo = ({task, priority, onClickTask}:any)=>{
 }
 
 const TodoList = ()=>{
-    const isCompleted = (task:any)=>{
+    const isCompleted = (task:string)=>{
         console.log("clicked task is:", task)     
     }
     return (
         <Card title="My todo list">
             <p>Todo Task is:</p>
-            <Todo task="Learn React" priority="1" onClickTask={isCompleted}/>
-            <Todo task="Build Project" priority="2" onClickTask={isCompleted}/>
+            <Todo task="Learn React" priority={1} onClickTask={isCompleted}/>
+            <Todo task="Build Project" priority={2} onClickTask={isCompleted}/>
         </Card>
     );
 }

@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { fetchUsers } from "../services/userService";
 
-function useUsers(url) {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+export type User={
+  id: number
+  name: string
+  email: string
+  company: {
+    name: string
+  }
+}
 
-  const loadUsers = async () => {
+
+function useUsers(url: string) {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const loadUsers = async (): Promise<void> => {
     try {
       setLoading(true);
       const data = await fetchUsers(url);

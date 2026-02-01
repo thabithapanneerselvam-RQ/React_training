@@ -1,12 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+type UserState={
+    search: string
+}
+
+const initialState: UserState={
+    search: ""
+}
+
 
 const userSlice = createSlice({
     name: "user",
-    initialState: {
-        search: ""
-    },
+    initialState,
     reducers: {
-        setSearch(state, action){
+        setSearch(state, action: PayloadAction<string>){
             state.search=action.payload;
         }
     }
@@ -14,5 +21,4 @@ const userSlice = createSlice({
 })
 
 export const {setSearch} = userSlice.actions;
-const userReducer = userSlice.reducer;
-export default userReducer;
+export default userSlice.reducer;

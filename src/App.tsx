@@ -8,10 +8,13 @@ import Contact from "./pages/Contact";
 import { Products, CarProducts, BikeProducts } from './pages/Products';
 import useRedirectHome from './hooks/useNavigateHome';
 
-function App() {
 
+function App() {
+  const redirectHome =  useRedirectHome();
+  
   return (
     <>
+    <button onClick={redirectHome}>Go to Home</button>
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />}></Route>
@@ -22,7 +25,6 @@ function App() {
           <Route path="bike" element={<BikeProducts />} />
         </Route>
       </Routes>
-      <button onClick={useRedirectHome()}>Go to Home</button>
     </>
   )
 }

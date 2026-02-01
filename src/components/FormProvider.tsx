@@ -1,9 +1,13 @@
 import { createContext } from "react";
-import { useFormLogic } from "../services/formService";
+import { useFormLogic, FormLogic } from "../services/formService";
 
-export const FormContext = createContext();
+export const FormContext = createContext<FormLogic | undefined>(undefined);
 
-function FormProvider({ children }) {
+type FormProviderProps = {
+  children: React.ReactNode
+}
+
+function FormProvider({ children }: FormProviderProps) {
   const form = useFormLogic();
 
   return (

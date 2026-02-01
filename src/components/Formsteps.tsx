@@ -3,7 +3,9 @@ import { FormContext } from "./FormProvider";
 import { STEPS, BUTTON_TEXT } from "../constants/formConstants";
 
 function FormSteps(){
-  const {step, theme, toggleTheme} = useContext(FormContext);
+    const context = useContext(FormContext);
+    if (!context) throw new Error("FormContext must be used inside FormProvider")
+    const {step, theme, toggleTheme} = context;
 
   return(
     <div className={`card ${theme}`}>
@@ -21,7 +23,9 @@ function FormSteps(){
 }
 
 function StepOne(){
-    const {formData, handleChange, emailError, nextStep} = useContext(FormContext)
+    const context = useContext(FormContext);
+    if (!context) throw new Error("FormContext must be used inside FormProvider")
+    const {formData, handleChange, emailError, nextStep} = context
     return(
     <>
       <h2>{STEPS[1].title}</h2>
@@ -58,7 +62,9 @@ function StepOne(){
 }
 
 function StepTwo(){
-    const {formData, handleChange, nextStep, prevStep} = useContext(FormContext)
+    const context = useContext(FormContext);
+    if (!context) throw new Error("FormContext must be used inside FormProvider")
+    const {formData, handleChange, nextStep, prevStep} = context
     return(
         <>
         <h2>{STEPS[2].title}</h2>
@@ -98,7 +104,9 @@ function StepTwo(){
 
 
 function StepThree(){
-    const {formData, handleChange, nextStep, prevStep} = useContext(FormContext)
+    const context = useContext(FormContext);
+    if (!context) throw new Error("FormContext must be used inside FormProvider")
+    const {formData, handleChange, nextStep, prevStep} = context
     return(
         <>
         <h2>{STEPS[3].title}</h2>
@@ -132,7 +140,9 @@ function StepThree(){
 
 
 function StepFour(){
-    const {formData, prevStep} = useContext(FormContext)
+    const context = useContext(FormContext);
+    if (!context) throw new Error("FormContext must be used inside FormProvider")
+    const {formData, prevStep} = context
     const handleSubmit = () => {
     console.log("Final Data:", formData);
   };

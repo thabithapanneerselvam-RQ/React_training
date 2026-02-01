@@ -1,11 +1,33 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-export function useFormLogic() {
-  const [step, setStep] = useState(1);
-  const [theme, setTheme] = useState("light");
-  const [emailError, setEmailError] = useState("");
+export type FormData = {
+  firstName: string
+  lastName: string
+  email: string
+  gender: string
+  dob: string
+  state: string
+  city: string
+  zip: string
+}
 
-  const [formData, setFormdata] = useState({
+export type FormLogic = {
+  step: number
+  theme: "light" | "dark"
+  toggleTheme: () => void
+  formData: FormData
+  emailError: string
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  nextStep: () => void
+  prevStep: () => void
+}
+
+export function useFormLogic(): FormLogic {
+  const [step, setStep] = useState<number>(1);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [emailError, setEmailError] = useState<string>("");
+
+  const [formData, setFormdata] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -20,7 +42,7 @@ export function useFormLogic() {
     setTheme(prev => (prev === "light" ? "dark" : "light"));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormdata(prev => ({ ...prev, [name]: value }));
 
